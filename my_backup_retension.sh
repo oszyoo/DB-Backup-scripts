@@ -111,11 +111,14 @@ function perform_backups()
 	done
 
 	echo -e "\nAll database backups complete!"
+	
+	if [ $ENABLE_SCP_BACKUPS = "yes" ]
+	then
 
-	echo "Copy to $SCP_HOST"
+		echo "Copy to $SCP_HOST"
 
-	scp -i /root/.ssh/id_rsa -r -P "$SCP_PORT" $FINAL_BACKUP_DIR "$SCP_HOST":$FINAL_BACKUP_DIR
-
+		scp -i /root/.ssh/id_rsa -r -P "$SCP_PORT" $FINAL_BACKUP_DIR "$SCP_HOST":$FINAL_BACKUP_DIR
+	fi
 
 }
 
